@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import javax.annotation.PostConstruct;
 
 import org.apache.http.Header;
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
@@ -18,6 +19,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.protocol.HttpContext;
+import org.apache.http.protocol.HttpCoreContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -105,4 +107,40 @@ public class Loader {
 		}
 	}
 
+	public String loadRedirect(String url) throws ScraperException {
+		StopWatch stopWatch = new StopWatch("Loader");
+		stopWatch.start();
+		
+		try {
+			String fullUrl = BASE+url;
+			LOGGER.info(fullUrl);
+			HttpGet get = new HttpGet(fullUrl);
+			
+			ResponseHandler<String> handler = new ResponseHandler<String>() {
+				@Override
+				public String handleResponse(HttpResponse resp) throws ClientProtocolException, IOException {
+					Header cacheHeader = resp.getFirstHeader("X-Cached");
+					if(null != cacheHeader) {
+						LOGGER.debug("Response was "+cacheHeader.getValue());
+					}
+					return null;
+				}};
+	
+			try {
+				client.execute(get, handler, ctx);
+				HttpRequest request = (HttpRequest) ctx.getAttribute(HttpCoreContext.HTTP_REQUEST);
+				return request.getRequestLine().getUri();
+			} 
+			catch (IOException e) {
+				throw new ScraperException(e);
+			} 
+			finally {
+				get.releaseConnection();
+			}
+		}
+		finally {
+			stopWatch.stop();
+			LOGGER.debug("Loading the redirect took "+stopWatch.getTotalTimeMillis()+"ms: "+url);
+		}
+	}
 }
