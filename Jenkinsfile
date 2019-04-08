@@ -36,24 +36,6 @@ pipeline {
                 }
             }
 		}
-
-        
-	    stage('Publish') {
-      		steps {
-      			// To push to Docker hub
-    			//withDockerRegistry([ credentialsId: "ef879a02-b51a-49bb-a743-58f46dd8b4c8", url: "" ]) {
-          		//	sh 'docker push rdomloge/catholicon-ms-common'
-        		//}
-        		
-        		// To push to local registry
-        		script{
-	        		docker.withRegistry('https://localhost:5000') {
-				        //sh 'docker push rdomloge/catholicon-ms-common'
-				        IMAGE.push();
-				    }
-			    }
-      		}
-    	}
     	
 		stage('Tag & Release') {
 			when{
