@@ -44,7 +44,7 @@ pipeline {
 
 		    steps {
 		        script {
-		            sh "mvn -Dmaven.test.skip=true -DpreparationGoals=initialize release:clean release:prepare release:perform -B"
+		            sh "mvn -DscmCommentPrefix='[skip ci]' -Dmaven.test.skip=true -DpreparationGoals=initialize release:clean release:prepare release:perform -B"
 		        }
 
 		    }
