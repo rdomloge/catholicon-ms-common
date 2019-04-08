@@ -44,7 +44,7 @@ pipeline {
 
 		    steps {
 		        script {
-		            sh "mvn -Dmaven.test.skip=true -DpushChanges=false -DpreparationGoals=initialize release:clean release:prepare release:perform -B"
+		            sh "mvn -X -Dmaven.test.skip=true -DpushChanges=false -DpreparationGoals=initialize release:clean release:prepare release:perform -B"
 		        }
 
 		    }
