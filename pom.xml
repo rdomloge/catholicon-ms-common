@@ -57,5 +57,6 @@
 	   <connection>scm:git:git@github.com:rdomloge/catholicon-ms-common.git</connection>
 	   <url>scm:git:git@github.com:rdomloge/catholicon-ms-common.git</url>
 	   <developerConnection>scm:git:git@github.com:rdomloge/catholicon-ms-common.git</developerConnection>
+	   <tag>HEAD</tag>
 	</scm>
 </project>
