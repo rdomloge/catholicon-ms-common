@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.domloge.catholicon</groupId>
 	<artifactId>catholicon-ms-common</artifactId>
-	<version>1.282</version>
+	<version>1.283-SNAPSHOT</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -55,6 +55,6 @@
 	   <connection>scm:git:git@github.com:rdomloge/catholicon-ms-common.git</connection>
 	   <url>scm:git:git@github.com:rdomloge/catholicon-ms-common.git</url>
 	   <developerConnection>scm:git:git@github.com:rdomloge/catholicon-ms-common.git</developerConnection>
-	  <tag>catholicon-ms-common-1.282</tag>
+	  <tag>catholicon-ms-common-1.10</tag>
   </scm>
 </project>
