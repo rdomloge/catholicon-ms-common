@@ -13,23 +13,23 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
-            	script{
-	            	if (git_log.contains('[maven-release-plugin]')) {
-	            		echo 'Ignoring release change - not running'
-						currentBuild.result = 'ABORTED'
-						return
-					}
-	                sh '''
-	                    echo "PATH = ${PATH}"
-	                    echo "M2_HOME = ${M2_HOME}"
-	                '''
-            	}
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
             }
         }
 
         stage ('Build') {
             steps {
-                sh 'mvn -Dmaven.test.skip=true package'
+            	script{
+            	    if (git_log.contains('[maven-release-plugin]')) {
+	            		echo 'Ignoring release change - not running'
+						currentBuild.result = 'ABORTED'
+						return
+					}
+	                sh 'mvn -Dmaven.test.skip=true package'
+            	}
             }
         }
         
