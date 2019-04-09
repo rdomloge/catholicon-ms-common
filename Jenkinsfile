@@ -23,12 +23,15 @@ pipeline {
         stage ('Build') {
             steps {
             	script{
-            	    if (git_log.contains('[maven-release-plugin]')) {
+            		result = sh (script: "git log -1 | grep '\\[maven-release-plugin\\]'", returnStatus: true) 
+					if (result != 0) {
+						echo "Performing build..."
+		                sh 'mvn -Dmaven.test.skip=true package'
+					} else {
 	            		echo 'Ignoring release change - not running'
 						currentBuild.result = 'ABORTED'
 						return
 					}
-	                sh 'mvn -Dmaven.test.skip=true package'
             	}
             }
         }
