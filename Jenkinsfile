@@ -15,6 +15,7 @@ pipeline {
             steps {
             	script{
 	            	if (git_log.contains('[maven-release-plugin]')) {
+	            		echo 'Ignoring release change - not running'
 						currentBuild.result = 'ABORTED'
 						return
 					}
