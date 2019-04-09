@@ -13,14 +13,16 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
-            	if (git_log.contains('[maven-release-plugin]')) {
-					currentBuild.result = 'ABORTED'
-					return
-				}
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
+            	script{
+	            	if (git_log.contains('[maven-release-plugin]')) {
+						currentBuild.result = 'ABORTED'
+						return
+					}
+	                sh '''
+	                    echo "PATH = ${PATH}"
+	                    echo "M2_HOME = ${M2_HOME}"
+	                '''
+            	}
             }
         }
 
