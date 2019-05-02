@@ -8,6 +8,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
 
 @Component
 public class Sync<T> {
@@ -15,6 +16,9 @@ public class Sync<T> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Sync.class); 
 	
 	public Diff<T> compare(Map<Integer, T> master, Map<Integer, T> db) {
+		
+		StopWatch sw = new StopWatch();
+		sw.start();
 		
 		Diff<T> diff = new Diff<>();
 		
@@ -55,6 +59,7 @@ public class Sync<T> {
 			}
 		}
 		
+		LOGGER.debug(sw.prettyPrint());
 		return diff;
 	}
 
