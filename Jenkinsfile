@@ -67,5 +67,12 @@ pipeline {
 		        }
     		}
 		}
+		
+		stage('Build deps') {
+			steps {
+			    build "rdomloge/catholicon-ms-seasons/develop"
+			}
+		}
+
 	}
 }
