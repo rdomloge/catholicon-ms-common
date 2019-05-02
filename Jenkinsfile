@@ -67,5 +67,10 @@ pipeline {
 		        }
     		}
 		}
+		
+		stage('Starting seasons') {
+		    build job: 'catholicon-ms-seasons'
+		}
+
 	}
 }
