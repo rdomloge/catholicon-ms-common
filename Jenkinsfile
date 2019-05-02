@@ -67,13 +67,5 @@ pipeline {
 		        }
     		}
 		}
-		
-		stage('Starting downstream jobs') {
-			steps {
-			    build job: 'catholicon-ms-seasons'
-				build job: 'catholicon-ms-leagues'
-			}
-		}
-
 	}
 }
