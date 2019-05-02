@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.domloge.catholicon</groupId>
 	<artifactId>catholicon-ms-common</artifactId>
-	<version>1.321-SNAPSHOT</version>
+	<version>1.322-SNAPSHOT</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
