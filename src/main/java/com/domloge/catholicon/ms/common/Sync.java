@@ -17,7 +17,7 @@ public class Sync<T> {
 	
 	public Diff<T> compare(Map<Integer, T> master, Map<Integer, T> db) {
 		
-		StopWatch sw = new StopWatch();
+		StopWatch sw = new StopWatch("Sync");
 		sw.start();
 		
 		Diff<T> diff = new Diff<>();
@@ -59,6 +59,7 @@ public class Sync<T> {
 			}
 		}
 		
+		sw.stop();
 		LOGGER.debug(sw.prettyPrint());
 		return diff;
 	}
