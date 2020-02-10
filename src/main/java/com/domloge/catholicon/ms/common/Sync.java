@@ -43,7 +43,7 @@ public class Sync<T> {
 				T masterValue = master.get(masterKey);
 				T dbValue = db.get(masterKey);
 				if( ! masterValue.equals(dbValue)) {
-					LOGGER.info("Master value {} has changed - updating DB", masterValue);
+					LOGGER.info("Master value {} has changed - updating DB", masterKey);
 					// Merge
 					try {
 						BeanUtils.copyProperties(dbValue, masterValue);
@@ -54,13 +54,13 @@ public class Sync<T> {
 					}
 				}
 				else {
-					LOGGER.info("Master value {} matches DB value {}", masterValue, dbValue);
+					LOGGER.info("Master value {} matches DB value", masterKey);
 				}
 			}
 		}
 		
 		sw.stop();
-		LOGGER.debug(sw.prettyPrint());
+		LOGGER.debug(sw.shortSummary());
 		return diff;
 	}
 
