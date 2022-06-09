@@ -3,22 +3,25 @@ package com.domloge.catholicon.ms.common;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SyncTest {
+public class SyncTest extends Sync {
 	
-	private Sync<String> target;
+	private Sync<Integer,String> target;
 	
 	@Before
 	public void setup() {
 		target = new Sync<>();
+		target.mapper = new ObjectMapper();
 	}
 
 	@Test
-	public void compare_itemAdded_diffContains() {
+	public void compare_itemAdded_diffContains() throws ScraperException {
 		// given
 		Map<Integer, String> db = new HashMap<>();
 		Map<Integer, String> master = new HashMap<>();
@@ -32,7 +35,7 @@ public class SyncTest {
 	}
 	
 	@Test
-	public void compare_itemRemoved_diffContains() {
+	public void compare_itemRemoved_diffContains() throws ScraperException {
 		// given
 		Map<Integer, String> db = new HashMap<>();
 		Map<Integer, String> master = new HashMap<>();
@@ -46,7 +49,7 @@ public class SyncTest {
 	}
 	
 	@Test
-	public void compare_itemUpdated_diffContains() {
+	public void compare_itemUpdated_diffContains() throws ScraperException {
 		// given
 		Map<Integer, String> db = new HashMap<>();
 		Map<Integer, String> master = new HashMap<>();
